@@ -57,6 +57,28 @@ to `backup/` (gitignored) first.
 systemctl --user list-timers omarchy-opencode-usage.timer
 ```
 
+## Troubleshooting: the icon is missing
+
+The agents panel discovers records with `find` **only at shell start and after
+its own update cycle** (15 minutes). `Agent.qml` watches only the files it
+already knows about, so a record that appears in between is invisible until
+the next cycle — even though the file is valid. `install.sh` nudges the panel
+for exactly this reason; if the icon is still missing:
+
+```bash
+omarchy-shell omarchy.agents refresh      # makes the panel run its update now
+```
+
+or open the panel and press `r`, or restart the shell. The registry lists the
+widget as enabled and placed in the bar's `right` section already, so no
+layout change is needed.
+
+**The popup hero may log `Cannot open: .../assets/opencode.svg`.** That is
+expected: 4.0.5 ships marks only for Claude, Codex, and Fireworks, and the
+panel is built to fall back to the module's bar glyph (`Panel.qml`: "assets/
+&lt;id&gt;.svg if it ships one, the module's bar glyph if it doesn't"). Upstream
+adds `opencode.svg` / `opencode-light.svg`.
+
 ## How it retires
 
 Two independent triggers, both calling `uninstall.sh --retire`:

@@ -85,6 +85,15 @@ remove_old_solution() {
   fi
 }
 
+nudge_panel() {
+  # The panel lists the usage directory only at shell start and after its own
+  # update cycle (default 15 minutes); Agent.qml watches only files it already
+  # knows about, so a record that appears in between goes unseen until then.
+  # Best effort: ask the panel to run its update now, which rescans on exit.
+  command -v omarchy-shell >/dev/null 2>&1 || return 0
+  omarchy-shell -q omarchy.agents refresh 2>/dev/null || true
+}
+
 # The new producer is installed and run before the old one is removed, so the
 # OpenCode tab never disappears — only the duplicate "OpenCode Go" tab does.
 ensure_mirror
@@ -102,4 +111,5 @@ else
 fi
 
 remove_old_solution
+nudge_panel
 echo "done      $LIB/status.sh"
