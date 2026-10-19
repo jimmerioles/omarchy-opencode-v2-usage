@@ -105,3 +105,8 @@ directory, and **leaves `opencode.json` alone** for upstream to keep writing.
   this replaces double-counted them (~17M tokens on 2026-10-19).
 - `--filter=blob:none` fetches blobs on demand, so an offline re-install needs
   a plain `--depth 1` clone instead.
+
+## License
+
+MIT. The collector this runs is Omarchy's own, checked out from upstream and
+MIT-licensed by its authors; nothing here reimplements it.
