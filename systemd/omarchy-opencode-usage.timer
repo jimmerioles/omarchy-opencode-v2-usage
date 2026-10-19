@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh the OpenCode usage record
+
+[Timer]
+OnBootSec=90s
+OnUnitActiveSec=900s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

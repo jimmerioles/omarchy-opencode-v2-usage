@@ -1,0 +1,15 @@
+#!/bin/bash
+# Retires the temporary OpenCode-usage shim once upstream's collector ships.
+# omarchy-update runs post-update hooks after system packages and migrations,
+# so upstream's binary is already on disk when this fires.
+set -e
+
+[[ -x /usr/share/omarchy/bin/omarchy-agent-usage-opencode ]] || exit 0
+[[ -d $HOME/.local/share/omarchy-opencode-usage ]] || exit 0
+
+omarchy-notification-send -g "󰚩" "OpenCode usage is built in" \
+  "Removed the temporary agents-panel shim; Omarchy now collects it." || true
+
+# exec: bash stops reading this file after the hand-off, so uninstall.sh may
+# safely delete it as part of the cleanup.
+exec "$HOME/.local/lib/omarchy-opencode-usage/uninstall.sh" --retire

@@ -1,0 +1,7 @@
+[Unit]
+Description=Refresh the OpenCode usage record for the Omarchy agents panel
+
+[Service]
+Type=oneshot
+Environment=OMARCHY_PATH=%h/.local/share/omarchy-opencode-usage
+ExecStart=%h/.local/lib/omarchy-opencode-usage/run.sh

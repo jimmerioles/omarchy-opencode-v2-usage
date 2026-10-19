@@ -1,0 +1,23 @@
+OpenCode agent-usage collector (upstream PR checkout)
+====================================================
+
+Repo:    https://github.com/omacom/omarchy
+PR:      https://github.com/omacom/omarchy/pull/14040
+Ref:     agents-cursor-opencode-copilot-muse
+Commit:  f2e5624075dd9d82c08fe6699535bf5557064e33
+Subject: Remove the retired LiteLLM, Kiro, and Freebuff usage records
+Pinned:  2026-10-19
+
+Sparse, non-cone paths materialised into the mirror checkout:
+
+  /bin/omarchy-agent-usage-*
+  /bin/omarchy-agent-account-state
+  /shell/plugins/agents/collectors.py
+
+Pinned so the shim cannot drift under us. Picking up upstream fixes is
+deliberate:
+
+  ./refresh.sh            re-pin to the branch tip and refresh
+  ./refresh.sh <sha>      pin a specific commit and refresh
+
+Re-run ./install.sh after changing OMARCHY_PR_SHA to make a pin permanent.
